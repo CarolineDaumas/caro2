@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Caddy } from 'src/app/models/caddy.models';
 import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
+import { Training } from 'src/app/models/training.models';
+
 
 @Component({
   selector: 'app-caddy',
@@ -8,38 +11,28 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./caddy.component.css']
 })
 export class CaddyComponent implements OnInit {
-  listCaddy: Caddy [] |undefined ;
+  
+  listCaddy: Training [] |undefined ;
   listTotal=0
-  constructor(private CartService:CartService) { }
+  constructor(private CartService:CartService, private router: Router) { }
 
   ngOnInit(): void {
-    this.listCaddy=[]
+    this.listCaddy=[];
+    this.listCaddy=this.CartService.getCaddy();
+    this.listTotal=this.CartService.getTotal();
+   
   
 
-    let caddy = window.localStorage;
-    let caddySize = caddy.length
-    let total = 0
     
-
-    for (let i = 0; i < caddySize; i++) {
-
-      let obj = JSON.parse(caddy.getItem(caddy.key(i)||"")||"")
-          this.listCaddy.push(obj)
-          console.log(obj)
-
-      this.listTotal += obj.sum
-}
-console.log(total)
-
-for (let i=0; i<this.listCaddy.length;i++ ) {
-  console.log(this.listCaddy[i])
-
 }
 
+onDeleteTraining (training:Training){
+this.CartService.removeTraining(training);
 }
 
-onDeleteTraining (item: Caddy){
-  this.CartService.removeTraining(item);
+onCommand(){
+  this.router.navigateByUrl('customer');
+}
 }
   
-}
+

@@ -11,13 +11,13 @@
 
             </thead>
             <tbody>
-                <tr *ngFor="let item of listCaddy">
-                    <td>{{item.ref}}</td>
-                    <td>{{item.name}}</td>
-                    <td>{{item.sum}}</td>
-                    <td>{{item.qty}}</td>
+                <tr *ngFor="let training of listCaddy">
+                    <td>{{training.id}}</td>
+                    <td>{{training.name}}</td>
+                    <td>{{training.price}}</td>
+                    <td>{{training.quantity}}</td>
                     <td></td>
-                    <td> <a class="btn btn-danger"(click)="onDeleteTraining(item)">Supprimer</a></td>
+                    <td> <a class="btn btn-danger"(click)="onDeleteTraining(training)">Supprimer</a></td>
                 </tr>
 
                 <tr>
@@ -26,6 +26,12 @@
                     <td></td>
                     <td>{{listTotal}}</td>
                 </tr>
+
+                <br>
+
+                <a class="btn btn-success"(click)="onCommand()">Commander</a>
+               
+                
 
             </tbody>
 
